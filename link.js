@@ -26,7 +26,45 @@ class LinkedList {
             tempNode.next = new _Node(item, null)
         }
     }
-    //insertBetween(){}
+    insertBefore(value, key){
+        //empty list case
+        if (!this.head) return null
+        //head case
+        if (this.head.value === key){
+            this.insertFirst(value)
+            return
+        }
+        //move forward until found
+        else {
+            let prevNode
+            let foundNode = this.head.next
+        while (foundNode.value !== key) {
+            prevNode = foundNode       
+            foundNode = foundNode.next
+        }
+        if (foundNode === key) {
+            const newNode = new _Node(val, foundNode)
+            prevNode.next = newNode
+            return
+        } 
+        else {
+            console.log('Cannot find key')
+            return
+        }
+        
+        //Find the node with the value and the node before it
+        
+        //create a new node with the found node as it's next
+        //insert it as the next of the node before the found node
+
+        //head case
+        //end case
+        //not found case
+
+    }
+    insertAfter(value){
+        if (this.head.value === fuckeri)
+    }
     find(item) {
         let currNode = this.head
         if (!this.head) {
@@ -51,13 +89,18 @@ class LinkedList {
             return
         }
         let currNode = this.head
+        let previousNode = this.head
 
         while ((currNode !== null) && (currNode.value !== item)){
             previousNode = currNode
             currNode = currNode.next
         }
+        if (currNode === null) {
+            console.log('Item not found')
+            return
+        }
+        previousNode.next = currNode.next
     }
-    
 }
 
-console.log(new LinkedList(1))
+module.exports = LinkedList
