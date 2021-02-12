@@ -11,6 +11,10 @@ function main(){
     console.log(SLL)
     SLL.insertLast('Tauhida')
     SLL.remove('squirrel')
-
+    SLL.insertBefore('Boomer', 'Athena')
+    console.log(SLL.find('Athena'))
+    SLL.insertAfter('Helo', 'Hotdog')
+    SLL.insertAt(2, 'Kat')
+    SLL.remove('Tauhida')
 }
 main()

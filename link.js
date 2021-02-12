@@ -1,5 +1,3 @@
-
-
 class _Node {
     constructor(value, next) {
         this.value = value;
@@ -26,44 +24,84 @@ class LinkedList {
             tempNode.next = new _Node(item, null)
         }
     }
-    insertBefore(value, key){
+    insertBefore(key, val){
         //empty list case
         if (!this.head) return null
         //head case
         if (this.head.value === key){
-            this.insertFirst(value)
+            this.insertFirst(val)
             return
         }
         //move forward until found
         else {
-            let prevNode
+            let prevNode = this.head
             let foundNode = this.head.next
+            while (foundNode.value !== key) { 
+                prevNode = foundNode       
+                foundNode = foundNode.next
+            }
+            //once found, use found as new node's next and set new node as next for found's previous node 
+            if (foundNode.value === key) {
+                const newNode = new _Node(val, foundNode)
+                prevNode.next = newNode
+                return
+            } 
+            else {
+                console.log('Cannot find key')
+                return
+            }
+        }        
+    }
+    insertAfter(key, val){
+        //empty list case
+        if (!this.head) return null
+        //head case
+        if (this.head.value === key) {
+            let newNode = new _Node(val, this.head.next)
+            this.head.next = newNode
+            return
+        }
+        //move forward until found
+        let foundNode = this.head.next
         while (foundNode.value !== key) {
-            prevNode = foundNode       
             foundNode = foundNode.next
         }
-        if (foundNode === key) {
-            const newNode = new _Node(val, foundNode)
-            prevNode.next = newNode
-            return
-        } 
-        else {
-            console.log('Cannot find key')
+        //if found, new node becomes found's next, and found's next becomes new node's next
+        if (foundNode.value === key) {
+            let newNode = new _Node(val, foundNode.next)
+            foundNode.next = newNode
+        } else {
+            console.log('Key node not found')
+        }
+    }
+    insertAt(position, val){
+        //empty list case
+        if (!this.head) return null
+        //head case
+        if (position === 0) {
+            this.insertFirst(val)
             return
         }
+        //main case - find node @ position by incrementing from head
+        let count = 0;
+        //start at head
+        let prevNode = null
+        let currNode = this.head
+        while (count < position && currNode.next !== null) {
+            prevNode = currNode
+            currNode = currNode.next
+            count++
+        }
+        if (count === position) {
+            let newNode = new _Node(val, currNode)
+            prevNode.next = newNode
+            console.log('curr', newNode)
+            return
+        } else {
+          console.log('Position out of current range');
+          return;
+        }
         
-        //Find the node with the value and the node before it
-        
-        //create a new node with the found node as it's next
-        //insert it as the next of the node before the found node
-
-        //head case
-        //end case
-        //not found case
-
-    }
-    insertAfter(value){
-        if (this.head.value === fuckeri)
     }
     find(item) {
         let currNode = this.head
